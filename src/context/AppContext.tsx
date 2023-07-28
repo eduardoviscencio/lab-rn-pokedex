@@ -5,7 +5,7 @@ import React, {
   useReducer,
 } from 'react';
 
-import type {PokemonResult} from '../types/PokemonList.type';
+import type {PokemonResult} from '../types/PokemonsResult.type';
 
 type AppState = {
   pokemons: PokemonResult[];

@@ -1,4 +1,4 @@
-export type PokemonList = {
+export type PokemonsResult = {
   count: number;
   next: string;
   previous: null;

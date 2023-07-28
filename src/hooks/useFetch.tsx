@@ -16,7 +16,6 @@ export const useFetch = <T,>(url: string) => {
 
         setData(result);
       } catch (_) {
-        setLoading(false);
         setError('Something went wrong');
       } finally {
         setLoading(false);

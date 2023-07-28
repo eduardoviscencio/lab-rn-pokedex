@@ -1,16 +1,16 @@
 import React, {useEffect} from 'react';
-import {FlatList, SafeAreaView, Text} from 'react-native';
+import {SafeAreaView, Text} from 'react-native';
 
-import type {PokemonList, PokemonResult} from '../../types/PokemonList.type';
+import type {PokemonsResult} from '../../types/PokemonsResult.type';
 
 import {useAppContext, useFetch} from '../../hooks';
 
-import {PokemonCard} from '../../components';
+import PokemonList from '../../components/PokemonList';
 
 const Home = () => {
   const {pokemons, setPokemons} = useAppContext();
 
-  const {loading, data} = useFetch<PokemonList>(
+  const {loading, data} = useFetch<PokemonsResult>(
     'https://pokeapi.co/api/v2/pokemon?limit=151'
   );
 
@@ -22,15 +22,7 @@ const Home = () => {
 
   return (
     <SafeAreaView>
-      {loading ? (
-        <Text>Loading...</Text>
-      ) : (
-        <FlatList
-          data={pokemons}
-          renderItem={({item}) => <PokemonCard pokemon={item} />}
-          keyExtractor={(item: PokemonResult, index) => `${item.name}-${index}`}
-        />
-      )}
+      {loading ? <Text>Loading...</Text> : <PokemonList pokemons={pokemons} />}
     </SafeAreaView>
   );
 };
