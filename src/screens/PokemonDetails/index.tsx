@@ -20,12 +20,13 @@ type PokemonDetailProps = NativeStackScreenProps<
 >;
 
 const PokemonDetails = ({route}: PokemonDetailProps) => {
-  const {id, color} = route.params;
+  const {id, color, isMine} = route.params;
 
-  const {setPokemonDetail} = useAppContext();
+  const {pokemonDetail, myPokemons, setPokemonDetail} = useAppContext();
 
   const {loading, data} = useFetch<PokemonData>(
-    `https://pokeapi.co/api/v2/pokemon/${id}`
+    `https://pokeapi.co/api/v2/pokemon/${id}`,
+    !isMine
   );
 
   useEffect(() => {
@@ -42,6 +43,13 @@ const PokemonDetails = ({route}: PokemonDetailProps) => {
     }
   }, [data, setPokemonDetail]);
 
+  useEffect(() => {
+    if (isMine) {
+      const pokemon = myPokemons.find(poke => poke.id === id.toString());
+      setPokemonDetail(pokemon!);
+    }
+  }, [isMine, id, myPokemons, setPokemonDetail]);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -54,7 +62,9 @@ const PokemonDetails = ({route}: PokemonDetailProps) => {
         <Image
           style={styles.pokemonImage}
           source={{
-            uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+            uri: !isMine
+              ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
+              : pokemonDetail?.image,
           }}
         />
         {loading ? (

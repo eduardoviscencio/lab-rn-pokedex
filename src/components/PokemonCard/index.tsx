@@ -14,7 +14,7 @@ import styles from './styles';
 import {gray} from '../../styles/theme';
 
 type PokemonCardProps = {
-  id: number;
+  id: string;
   name: string;
   image: string;
   isMine?: boolean;
@@ -39,8 +39,11 @@ const PokemonCard = memo(
     }, [image]);
 
     const handleGoToDetail = () => {
-      if (isMine) return;
-      navigation.navigate(POKEMON_DETAILS, {id, color: backgroundColor});
+      navigation.navigate(POKEMON_DETAILS, {
+        id,
+        color: backgroundColor,
+        isMine,
+      });
     };
 
     return (

@@ -7,7 +7,7 @@ import {
 
 export type StackParamList = {
   [HOME]: undefined;
-  [POKEMON_DETAILS]: {id: number; color: string};
+  [POKEMON_DETAILS]: {id: string; color: string; isMine: boolean};
   [ADD_POKEMON]: undefined;
   [MY_POKEMONS]: undefined;
 };

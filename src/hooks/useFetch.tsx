@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-export const useFetch = <T,>(url: string) => {
+export const useFetch = <T,>(url: string, enabled: boolean = true) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -28,12 +28,12 @@ export const useFetch = <T,>(url: string) => {
       }
     };
 
-    fetchData();
+    enabled && fetchData();
 
     return () => {
       isMounted = false;
     };
-  }, [url]);
+  }, [url, enabled]);
 
   return {loading, data, error};
 };

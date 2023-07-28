@@ -20,10 +20,10 @@ const MyPokemons = () => {
         contentContainerStyle={styles.container}
         renderItem={({item}) => (
           <PokemonCard
-            id={parseInt(item.id)}
+            id={item.id}
             name={item.name}
             image={item.image}
-            isMine={true}
+            isMine
           />
         )}
         keyExtractor={item => `${item.name}-${item.id}`}
