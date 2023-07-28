@@ -1,0 +1,43 @@
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import type {StackParamList} from '../src/types/Stack.type';
+
+import {HOME, POKEMON_DETAIL, ADD_POKEMON} from '../src/constants/screens';
+
+import {Home, PokemonDetail, AddPokemon} from '../src/screens';
+
+const Stack = createNativeStackNavigator<StackParamList>();
+
+const AppNavigator = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName={HOME}>
+        <Stack.Screen
+          name={HOME}
+          component={Home}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={POKEMON_DETAIL}
+          component={PokemonDetail}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={ADD_POKEMON}
+          component={AddPokemon}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default AppNavigator;
