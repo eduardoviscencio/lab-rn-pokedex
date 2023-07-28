@@ -13,8 +13,9 @@ const PokemonList = ({pokemons}: PokemonListProps) => {
   return (
     <FlatList
       data={pokemons}
+      showsVerticalScrollIndicator={false}
       renderItem={({item, index}) => (
-        <PokemonCard id={index + 1} pokemon={item} />
+        <PokemonCard id={index + 1} name={item.name} />
       )}
       keyExtractor={(item: PokemonResult, index) => `${item.name}-${index}`}
     />

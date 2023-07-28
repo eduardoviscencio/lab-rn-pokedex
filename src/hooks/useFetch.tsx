@@ -6,6 +6,8 @@ export const useFetch = <T,>(url: string) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchData = async () => {
       setLoading(true);
 
@@ -13,6 +15,10 @@ export const useFetch = <T,>(url: string) => {
         const response = await fetch(url);
 
         const result: T = await response.json();
+
+        if (!isMounted) {
+          return;
+        }
 
         setData(result);
       } catch (_) {
@@ -23,6 +29,10 @@ export const useFetch = <T,>(url: string) => {
     };
 
     fetchData();
+
+    return () => {
+      isMounted = false;
+    };
   }, [url]);
 
   return {loading, data, error};

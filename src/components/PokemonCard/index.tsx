@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import {
   ActivityIndicator,
   Image,
@@ -6,8 +6,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-import type {PokemonResult} from '../../types/PokemonsResult.type';
+import type {StackParamList} from '../../types/Stack.type';
+
+import {POKEMON_DETAIL} from '../../constants/screens';
 
 import {createPokemonId} from '../../helpers/createPokemonId';
 
@@ -15,16 +19,22 @@ import styles from './styles';
 
 type PokemonCardProps = {
   id: number;
-  pokemon: PokemonResult;
+  name: string;
 };
 
-const PokemonCard = ({id, pokemon}: PokemonCardProps) => {
+const PokemonCard = memo(({id, name}: PokemonCardProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
+  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
+
+  const handleGoToDetail = () => {
+    navigation.navigate(POKEMON_DETAIL, {id});
+  };
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={handleGoToDetail}>
       <View>
-        <Text>{pokemon.name}</Text>
+        <Text>{name}</Text>
         <Text>{createPokemonId(id)}</Text>
         <Image
           style={styles.image}
@@ -37,6 +47,6 @@ const PokemonCard = ({id, pokemon}: PokemonCardProps) => {
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 export default PokemonCard;

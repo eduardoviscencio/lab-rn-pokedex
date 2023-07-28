@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 
 import type {PokemonsResult} from '../../types/PokemonsResult.type';
 
 import {useAppContext, useFetch} from '../../hooks';
 
-import PokemonList from '../../components/PokemonList';
+import {FloatingActionButton, PokemonList} from '../../components';
+
+import styles from './styles';
 
 const Home = () => {
   const {pokemons, setPokemons} = useAppContext();
@@ -21,8 +23,17 @@ const Home = () => {
   }, [data?.results, setPokemons]);
 
   return (
-    <SafeAreaView>
-      {loading ? <Text>Loading...</Text> : <PokemonList pokemons={pokemons} />}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+        {loading ? (
+          <Text>Loading...</Text>
+        ) : (
+          <PokemonList pokemons={pokemons} />
+        )}
+        <FloatingActionButton action={() => {}}>
+          <Text style={styles.fabText}>+</Text>
+        </FloatingActionButton>
+      </View>
     </SafeAreaView>
   );
 };
