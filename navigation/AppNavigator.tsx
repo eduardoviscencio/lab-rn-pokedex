@@ -4,9 +4,14 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import type {StackParamList} from '../src/types/Stack.type';
 
-import {HOME, POKEMON_DETAIL, ADD_POKEMON} from '../src/constants/screens';
+import {
+  HOME,
+  POKEMON_DETAIL,
+  ADD_POKEMON,
+  MY_POKEMONS,
+} from '../src/constants/screens';
 
-import {Home, PokemonDetail, AddPokemon} from '../src/screens';
+import {Home, PokemonDetail, AddPokemon, MyPokemons} from '../src/screens';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -32,7 +37,18 @@ const AppNavigator = () => {
           name={ADD_POKEMON}
           component={AddPokemon}
           options={{
-            headerShown: false,
+            title: 'Add Pokemon',
+            headerBackVisible: false,
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name={MY_POKEMONS}
+          component={MyPokemons}
+          options={{
+            title: 'My Pokemons',
+            headerBackVisible: false,
+            headerShadowVisible: false,
           }}
         />
       </Stack.Navigator>

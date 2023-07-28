@@ -20,9 +20,10 @@ import styles from './styles';
 type PokemonCardProps = {
   id: number;
   name: string;
+  image: string;
 };
 
-const PokemonCard = memo(({id, name}: PokemonCardProps) => {
+const PokemonCard = memo(({id, name, image}: PokemonCardProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>();
@@ -39,7 +40,7 @@ const PokemonCard = memo(({id, name}: PokemonCardProps) => {
         <Image
           style={styles.image}
           source={{
-            uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+            uri: image,
           }}
           onLoad={() => setIsLoading(false)}
         />
