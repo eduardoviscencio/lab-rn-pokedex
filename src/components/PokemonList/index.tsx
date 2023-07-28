@@ -5,6 +5,8 @@ import type {PokemonResult} from '../../types/PokemonsResult.type';
 
 import PokemonCard from '../PokemonCard';
 
+import styles from './styles';
+
 type PokemonListProps = {
   pokemons: PokemonResult[];
 };
@@ -14,6 +16,9 @@ const PokemonList = ({pokemons}: PokemonListProps) => {
     <FlatList
       data={pokemons}
       showsVerticalScrollIndicator={false}
+      numColumns={2}
+      columnWrapperStyle={styles.wrapper}
+      contentContainerStyle={styles.container}
       renderItem={({item, index}) => {
         const id = index + 1;
 

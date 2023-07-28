@@ -6,12 +6,12 @@ import type {StackParamList} from '../src/types/Stack.type';
 
 import {
   HOME,
-  POKEMON_DETAIL,
+  POKEMON_DETAILS,
   ADD_POKEMON,
   MY_POKEMONS,
 } from '../src/constants/screens';
 
-import {Home, PokemonDetail, AddPokemon, MyPokemons} from '../src/screens';
+import {Home, PokemonDetails, AddPokemon, MyPokemons} from '../src/screens';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -27,8 +27,8 @@ const AppNavigator = () => {
           }}
         />
         <Stack.Screen
-          name={POKEMON_DETAIL}
-          component={PokemonDetail}
+          name={POKEMON_DETAILS}
+          component={PokemonDetails}
           options={{
             headerShown: false,
           }}

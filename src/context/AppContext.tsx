@@ -5,18 +5,17 @@ import React, {
   useReducer,
 } from 'react';
 
-import type {PokemonData} from '../types/PokemonData.type';
 import type {PokemonResult} from '../types/PokemonsResult.type';
-import type {NewPokemon} from '../types/NewPokemon.type';
+import type {PokemonDetail} from '../types/NewPokemon.type';
 
 type AppState = {
   pokemons: PokemonResult[];
-  myPokemons: NewPokemon[];
-  pokemonDetail: PokemonData | null;
+  myPokemons: PokemonDetail[];
+  pokemonDetail: PokemonDetail | null;
   setPokemons: (pokemons: PokemonResult[]) => void;
-  setPokemonDetail: (pokemon: PokemonData) => void;
+  setPokemonDetail: (pokemon: PokemonDetail) => void;
   removePokemonDetail: () => void;
-  addPokemon: (pokemon: NewPokemon) => void;
+  addPokemon: (pokemon: PokemonDetail) => void;
 };
 
 type ACTION_TYPE =
@@ -26,14 +25,14 @@ type ACTION_TYPE =
     }
   | {
       type: 'SET_POKEMON_DETAIL';
-      payload: PokemonData;
+      payload: PokemonDetail;
     }
   | {
       type: 'REMOVE_POKEMON_DETAIL';
     }
   | {
       type: 'ADD_POKEMON';
-      payload: NewPokemon;
+      payload: PokemonDetail;
     };
 
 type AppProviderProps = PropsWithChildren<{}>;
@@ -84,7 +83,7 @@ const AppProvider = ({children}: AppProviderProps) => {
     dispatch({type: 'SET_POKEMONS', payload: pokemons});
   }, []);
 
-  const setPokemonDetail = useCallback((pokemon: PokemonData) => {
+  const setPokemonDetail = useCallback((pokemon: PokemonDetail) => {
     dispatch({type: 'SET_POKEMON_DETAIL', payload: pokemon});
   }, []);
 
@@ -92,9 +91,16 @@ const AppProvider = ({children}: AppProviderProps) => {
     dispatch({type: 'REMOVE_POKEMON_DETAIL'});
   }, []);
 
-  const addPokemon = useCallback((pokemon: NewPokemon) => {
-    dispatch({type: 'ADD_POKEMON', payload: pokemon});
-  }, []);
+  const addPokemon = useCallback(
+    (pokemon: PokemonDetail) => {
+      if (state.myPokemons.find(item => item.id === pokemon.id)) {
+        return;
+      }
+
+      dispatch({type: 'ADD_POKEMON', payload: pokemon});
+    },
+    [state.myPokemons]
+  );
 
   return (
     <AppContext.Provider
