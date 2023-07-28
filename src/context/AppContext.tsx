@@ -5,10 +5,7 @@ import React, {
   useReducer,
 } from 'react';
 
-type PokemonResult = {
-  name: string;
-  url: string;
-};
+import type {PokemonResult} from '../types/PokemonResult.type';
 
 type AppState = {
   pokemons: PokemonResult[];
@@ -29,8 +26,6 @@ const reducer = (state: AppState, action: any): AppState => {
 };
 
 export const AppContext = createContext<AppState>(initialState);
-
-export const useAppContext = () => useContext(AppContext);
 
 const AppProvider = ({children}: AppProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);

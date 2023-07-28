@@ -1,11 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {SafeAreaView, TextInput} from 'react-native';
 
 const AddPokemon = () => {
   return (
-    <View>
-      <Text>AddPokemon</Text>
-    </View>
+    <SafeAreaView>
+      <TextInput />
+      <TextInput />
+      <TextInput />
+      <TextInput />
+      <TextInput />
+    </SafeAreaView>
   );
 };
 

@@ -1,12 +1,8 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {SafeAreaView} from 'react-native';
 
 const PokemonDetail = () => {
-  return (
-    <View>
-      <Text>PokemonDetail</Text>
-    </View>
-  );
+  return <SafeAreaView></SafeAreaView>;
 };
 
 export default PokemonDetail;
